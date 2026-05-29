@@ -1,0 +1,457 @@
+/* =============================================================
+   THE MARGIN — Main Stylesheet
+   style.css
+
+   Structure:
+     1. Design Tokens (custom properties)
+     2. CSS Reset / Base
+     3. Typography
+     4. Layout Utilities
+     5. Site Header
+     6. Main Navigation
+     7. Article Feed & Post Cards
+     8. Featured Post
+     9. Sidebar & Widgets
+    10. Subscribe Form
+    11. Site Footer
+    12. Responsive Breakpoints
+
+   Naming convention: BEM (.block__element--modifier)
+   All spacing uses --space-* tokens; no bare pixel values.
+============================================================= */
+
+
+/* -------------------------------------------------------------
+   1. DESIGN TOKENS
+   All visual constants live here as CSS custom properties.
+   Change a value here and it updates everywhere.
+------------------------------------------------------------- */
+:root {
+
+  /* --- Colour palette --- */
+  --color-paper:       #f7f3ec;   /* warm off-white page background */
+  --color-paper-dark:  #efe9df;   /* slightly deeper cream, used for sidebar */
+  --color-ink:         #1c1810;   /* near-black, main text */
+  --color-ink-muted:   #6b5e4e;   /* warm brown for secondary text */
+  --color-ink-faint:   #b5a898;   /* light taupe for decorative elements */
+  --color-accent:      #8b3a2a;   /* terracotta red for links and highlights */
+  --color-accent-dark: #6b2d1f;   /* deeper shade for hover states */
+  --color-rule:        #c9bfb0;   /* warm grey for horizontal rules */
+
+  /* Category badge colours */
+  --color-badge-essay:    #2a4a6b;  /* slate blue */
+  --color-badge-review:   #3d6b47;  /* forest green */
+  --color-badge-notebook: #7a4e1f;  /* amber brown */
+
+  /* --- Typography scale --- */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Serif 4', Georgia, serif;
+  --font-ui:      'DM Sans', Helvetica, sans-serif;
+
+  --text-xs:   0.75rem;    /* 12px — labels, legal text */
+  --text-sm:   0.875rem;   /* 14px — meta, captions */
+  --text-base: 1rem;       /* 16px — body copy baseline */
+  --text-md:   1.125rem;   /* 18px — comfortable reading size */
+  --text-lg:   1.375rem;   /* 22px — card headings */
+  --text-xl:   1.75rem;    /* 28px — section headings */
+  --text-2xl:  2.25rem;    /* 36px — featured post title */
+  --text-3xl:  3rem;       /* 48px — masthead */
+
+  --leading-tight:  1.2;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+
+  /* --- Spacing scale (multiples of 4px base unit) --- */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+
+  /* --- Layout --- */
+  --max-width-site:    75rem;      /* 1200px — overall site container */
+  --max-width-content: 42rem;      /* 672px — comfortable prose reading width */
+  --sidebar-width:     18rem;      /* 288px — fixed sidebar width */
+  --gap-columns:       var(--space-12); /* gutter between main and sidebar */
+
+  /* --- Visual decoration --- */
+  --border-radius-sm:  0.25rem;
+  --border-radius-md:  0.5rem;
+  --rule-thickness:    1px;
+  --rule-thick:        3px;
+
+  /* --- Transitions --- */
+  --transition-fast: 150ms ease;
+  --transition-mid:  300ms ease;
+
+}
+
+
+/* -------------------------------------------------------------
+   2. CSS RESET & BASE
+   Sensible defaults that remove browser inconsistencies.
+------------------------------------------------------------- */
+
+/* Use border-box sizing everywhere — makes layout math predictable */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent overflow on the page itself */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+
+  /* Subtle paper-grain texture using SVG noise (no image file needed) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* Remove list styling when lists are used for navigation */
+ul, ol {
+  list-style: none;
+}
+
+/* Make images behave responsively by default */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Inherit font properties in form elements (browsers don't do this by default) */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove default link styles so we can apply our own */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* -------------------------------------------------------------
+   3. TYPOGRAPHY
+   Base styles for headings, paragraphs, blockquotes, and
+   typographic utility classes.
+------------------------------------------------------------- */
+
+/* Page enters with a gentle fade */
+body {
+  animation: pageEnter var(--transition-mid) ease-out both;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(var(--space-2)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Paragraphs inside articles get comfortable spacing between them */
+.post__excerpt p + p {
+  margin-top: var(--space-4);
+}
+
+/* Bold text uses a slightly warmer shade so it doesn't feel harsh */
+strong {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+/* Italics inherit from Playfair's beautiful italic cut when inside headings */
+em {
+  font-style: italic;
+}
+
+
+/* -------------------------------------------------------------
+   4. LAYOUT UTILITIES
+   Reusable helpers for centering and spacing content.
+------------------------------------------------------------- */
+
+/* The main centering container — used in header, main, footer */
+.header-inner,
+.content-wrapper,
+.footer-inner {
+  max-width: var(--max-width-site);
+  margin-inline: auto;           /* centres horizontally */
+  padding-inline: var(--space-8);
+}
+
+
+/* Horizontal dividers */
+.section-divider {
+  border: none;
+  border-top: var(--rule-thickness) solid var(--color-rule);
+  margin-block: var(--space-10);
+}
+
+
+/* -------------------------------------------------------------
+   5. SITE HEADER
+   The masthead area at the top of the page.
+------------------------------------------------------------- */
+
+.site-header {
+  padding-block: var(--space-8);
+}
+
+/* Thick top rule gives the masthead a newspaper weight */
+.header-rule--top {
+  height: var(--rule-thick);
+  background-color: var(--color-ink);
+  margin-bottom: var(--space-6);
+}
+
+/* Thin bottom rule separates header from content */
+.header-rule--bottom {
+  height: var(--rule-thickness);
+  background-color: var(--color-rule);
+  margin-top: var(--space-6);
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+}
+
+/* --- Masthead --- */
+.masthead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Small issue label above the title */
+.masthead__issue {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+/* The big publication name */
+.masthead__title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: var(--leading-tight);
+  color: var(--color-ink);
+  transition: color var(--transition-fast);
+}
+
+.masthead__title:hover {
+  color: var(--color-accent);
+}
+
+/* Italic tagline beneath the title */
+.masthead__tagline {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-ink-muted);
+}
+
+
+/* -------------------------------------------------------------
+   6. MAIN NAVIGATION
+   Horizontal link list beneath the masthead.
+------------------------------------------------------------- */
+
+.main-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.main-nav__link {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  padding-bottom: var(--space-1);
+
+  /* Animated underline on hover */
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% var(--rule-thickness);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: color var(--transition-fast), background-size var(--transition-mid);
+}
+
+.main-nav__link:hover,
+.main-nav__link--active {
+  color: var(--color-accent);
+  background-size: 100% var(--rule-thickness);
+}
+
+
+/* -------------------------------------------------------------
+   7. ARTICLE FEED & POST CARDS
+   The main list of posts and standard card styling.
+------------------------------------------------------------- */
+
+/* The two-column grid for standard (non-featured) posts */
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+/* --- Base post styles (shared by all post types) --- */
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Category badge — small coloured label above the title */
+.post__category {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-badge-essay);
+  border-bottom: var(--rule-thickness) solid currentColor;
+  padding-bottom: var(--space-1);
+}
+
+/* Category colour variants */
+.post__category--review   { color: var(--color-badge-review);   }
+.post__category--notebook { color: var(--color-badge-notebook); }
+
+/* Post title link — animates colour on hover */
+.post__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--color-ink);
+}
+
+.post__title-link {
+  transition: color var(--transition-fast);
+}
+
+.post__title-link:hover {
+  color: var(--color-accent);
+}
+
+/* Meta row: author · date · read time */
+.post__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.post__meta-separator {
+  color: var(--color-ink-faint);
+}
+
+/* Card-style post (used in the two-column grid) */
+.post--card {
+  border-top: var(--rule-thickness) solid var(--color-rule);
+  padding-top: var(--space-6);
+}
+
+.post--card .post__title {
+  font-size: var(--text-lg);
+}
+
+.post--card .post__excerpt {
+  font-size: var(--text-base);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-normal);
+}
+
+/* "Read →" link at the bottom of each card */
+.read-more-link {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  transition: gap var(--transition-fast);
+}
+
+.read-more-link:hover {
+  color: var(--color-accent-dark);
+  gap: var(--space-3);   /* arrow nudges right on hover */
+}
+
+
+/* -------------------------------------------------------------
+   8. FEATURED POST
+   The large hero article at the top of the feed.
+------------------------------------------------------------- */
+
+.post--featured {
+  padding-bottom: var(--space-8);
+}
+
+/* Larger title for the featured post */
+.post__title--featured {
+  font-size: var(--text-2xl);
+  max-width: var(--max-width-content);
+}
+
+/* Pull quote — a styled excerpt that draws readers in */
+.post__pull-quote {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-style: italic;
+  font-weight: 400;
+  line-height: var(--leading-normal);
+  color: var(--color-accent);
+
+  /* Left border accent */
+  border-left: var(--space-1) solid var(--color-accent);
+  padding-left: var(--space-6);
+  margin-block: var(--space-6);
+  max-width: var(--max-width-content);
+}
+
+/* Featured post excerpt is wider and larger than card excerpts */
+.post--featured .post__excerpt {
+  max-width: var(--max-width-content);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+  color: var(--color-ink);
+}

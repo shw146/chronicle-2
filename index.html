@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De Alcala</title>
+
+  <!-- Google Fonts: Playfair Display for headings, Source Serif 4 for body, DM Sans for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- =============================================
+       SITE HEADER
+       Contains the masthead, tagline, and main navigation.
+  ============================================= -->
+  <header class="site-header">
+
+    <!-- Decorative horizontal rule above masthead -->
+    <div class="header-rule header-rule--top" aria-hidden="true"></div>
+
+    <div class="header-inner">
+
+      <!-- Publication name / logo -->
+      <div class="masthead">
+        <span class="masthead__issue">2026</span>
+        <a href="#" class="masthead__title">Mission San Diego De Alcala</a>
+      </div>
+
+    </div>
+
+    <!-- Decorative horizontal rule below masthead -->
+    <div class="header-rule header-rule--bottom" aria-hidden="true"></div>
+
+  </header>
+
+
+  <!-- =============================================
+       MAIN CONTENT AREA
+       Split into a primary article feed (left) and
+       a sidebar with meta information (right).
+  ============================================= -->
+  <main class="site-main" id="main-content">
+    <div class="content-wrapper">
+
+      <!-- ---- ARTICLE FEED ---- -->
+      <section class="article-feed" aria-label="Latest articles">
+
+        <!-- ------------------------------------------
+             FEATURED / HERO ARTICLE
+             The top post gets an enlarged, prominent treatment.
+        ------------------------------------------ -->
+        <article class="post post--featured">
+          <header class="post__header">
+            <span class="post__category">Essay</span>
+            <h2 class="post__title post__title--featured">
+              <a href="#" class="post__title-link">
+                Personalized curation
+              </a>
+            </h2>
+            <div class="post__meta">
+              <span class="post__author">by Shawn Wang</span>
+              <span class="post__meta-separator" aria-hidden="true">·</span>
+              <time class="post__date" datetime="2026-05-22">May 29, 2026</time>
+              <span class="post__meta-separator" aria-hidden="true">·</span>
+              <span class="post__read-time">8 min read</span>
+            </div>
+          </header>
+
+
+          <div class="post__excerpt">
+            <p>
+              Unfortunately, I was not able to get a video of the court grounds.
+              There seemed to be a wedding going on at the time of my visit and
+              out of respect for the newly wedded couple, I chose to avoid taking
+              videos of the area. Fortunately, I was able to take a video of the 
+              main entrance before the wedding started, and you'll see that below.
+            </p>
+            <p>
+              However, I will still talk about my experience with the mission. A
+              particular part that stood out to me quite a lot was that behind
+              the museum is a statue of Jesus on the cross in what seems to be a
+              rarely used corner of the mission. This was also in front of a 
+              sculpture of Mary holding Jesus in a small garden illuminated by 
+              the sun overhead. While there was music going on for the wedding, 
+              this place felt really far away from it all, almost like there was
+              a separation between the physical and the spiritual. While I don't
+              think there is anything I would change about the area, I do think 
+              that feeling of being fully encapsulated in the spirit of 
+              christianity is something that should be cherished rather than 
+              hidden. It felt like there was so much room there for thought and
+              contemplation. While I don't pray often I did there and then. 
+              Personally, I would have framed the area as a place to pray and 
+              think rather than just a place to put these statues.
+            </p>
+            <div style="display: flex; gap: 10px; padding: 5%;">
+              <img src="IMG_7632.jpeg" width= 33%>
+              <img src="IMG_7631.jpeg" width=33%>
+              <img src="IMG_7629.jpeg" width=33%>
+            </div>
+            <p>
+                These three photos display details about the life of those
+                involved with the missions. I particularly like the middle one
+                with the weaponry, because it serves as a good reminder that
+                even religious institutions like the Missions were established
+                in places carved out with blood. It's a very stark reminder for
+                us to look past the romanticized story that has been passed down
+                through the years and see the foundations of what those stories
+                were built on.
+            </p>
+            <p>
+                From the perspective of the sword: I woke up in a forge. The 
+                people around me talked about a new world and a king's support
+                for its exploration. They were going to establish churches and
+                convert the people from heathens into christians. I was put in a
+                sheath by the one who made me, waiting for an owner to come. 
+                Months passed and finally a buyer came... a priest? Why would a
+                religious figure like that need to buy a weapon? There wasn't 
+                much elaboration, things happened under the table, both literally
+                and metaphorically. I wouldn't see the light of day for another 
+                few months while I sat in my owner's room on a ship headed for
+                the new lands. I wasn't used much. I was left in my sheath most
+                of the time, but there was a few cases where I did taste blood. 
+                It seemed like the native peoples didn't want to comply with my
+                owner's desire for their conversion and out of frustration, 
+                stormed the building we stayed in. Only then did I feel the warm
+                blood of these native people. Yet I was cast away soon after, 
+                my owner too ashamed to pick me back up. Centuries passed before
+                I was recovered and placed into this glass box.
+        </div>
+        </article>
+
+        <!-- Visual divider between featured and standard posts -->
+        <hr class="section-divider" aria-hidden="true" />
+
+        <!-- ------------------------------------------
+             STANDARD POST GRID
+             Regular posts displayed in a two-column layout.
+        ------------------------------------------ -->
+          <!-- Post card 1 -->
+          <article class="post post--card">
+            <header class="post__header">
+              <h2 class="post__title">
+                <a href="#" class="post__title-link">
+                  Architectural reflection
+                </a>
+              </h2>
+              <video controls width="400"> <source src = "IMG_7625.mp4" type = "video/mp4">
+            </header>
+          </article>
+
+          <!-- Post card 2 -->
+          <article class="post post--card">
+            <header class="post__header">
+              <h2 class="post__title">
+                <a href="#" class="post__title-link">
+                  Quotes from the mission
+                </a>
+              </h2>
+            </header>
+            <div style="display: flex; gap: 10px;">
+              <img src="IMG_7623.jpeg" width= 33%>
+              <img src="IMG_7627.jpeg" width=33%>
+              <img src="IMG_7628.jpeg" width=33%>
+            </div>
+            <div class="post__excerpt">
+              <p>
+                These quotes of Mission San Diego de Alcalá reveals that the 
+                mission was far more than a simple religious outpost. It 
+                becomes clear that the mission also served as a refuge and 
+                center of survival for people attempting to establish themselves 
+                in unfamiliar lands.
+              </p>
+              <p>
+                While the sign says that there was no gold found on the premises
+                of the church, there might be more to that story than we are 
+                being told. Spain had sponsored these mission not simply out of
+                the goodness of their hearts, but rather because they were looking
+                for something. The exorbitant amounts of resources they poured 
+                into these religious efforts had ulterior motives to them. Thus
+                a plausible reason why gold was not found on the premises of the
+                church could likely be because it was brought back to Spain in 
+                order to prove the value in the continued sponsorship of these
+                missions.
+              </p>
+              <p>
+                A good clue into this is the living quarters in the church. For
+                the most part, they are quite barren, only including the bare 
+                minimum needed to rest. However, assuming that the church had 
+                done its job and gave refuge to people in need, it would make 
+                much more sense for the mission to be adorned with various 
+                patchwork equipment used to accomodate for refugees. There would
+                be signs of peoples' gratitude towards the mission in the form
+                of quilts, clothing, wares, etc. Yet we don't see any of it. 
+                Perhaps it's just speculation, but it would make sense that these
+                items would have been broken down and sent back to Spain where 
+                they would be sold for more conventional equipment.
+            </div>
+          </article>
+
+          <!-- Post card 3 -->
+          <article class="post post--card">
+            <header class="post__header">
+              <h2 class="post__title">
+                <a href="#" class="post__title-link">
+                  Kumeyaay lands
+                </a>
+              </h2>
+            </header>
+
+            <img src = "edited map.png" width = 500>
+
+            <div class="post__excerpt">
+              <p>
+                Rather than drawing a map and potentially getting it wrong, I
+                ended up finding one at the museum inside of the mission which
+                dislays the regions that Native Americans lived in. I've also 
+                labeled them with the 1775 revolt at the Mission San Diego De 
+                Alcala and with the arrival of the Franciscans in 1769. 
+              </p>
+              <p> 
+                The arrival of the Franciscans marked an important start to a
+                somewhat new but also repeated era of colonialization. Native
+                tribes had already had to contend with the English on the east
+                coast and had already had interactions with the French through 
+                their expeditions. We would also be naive to assume that they 
+                had not heard of the Spanish inquisition south of the them in 
+                modern day Mexico. Nonetheless, it was their first direct 
+                experience with colonialism, and clearly they didn't like it as
+                virtue of the revolt in 1775 on the very Mission we visited.
+            </div>
+          </article>
+
+          <!-- Post card 4 -->
+          <article class="post post--card">
+            <header class="post__header">
+              <h2 class="post__title">
+                <a href="#" class="post__title-link">
+                  Native disposition
+                </a>
+              </h2>
+            </header>
+
+            <div style="display: flex; gap: 10px;">
+              <img src="IMG_7630.jpeg" width= 33%>
+              <img src="IMG_7635.jpeg" width=33%>
+              <img src="IMG_7628.jpeg" width=33%>
+            </div>
+
+            <div class="post__excerpt">
+              <p>
+                Cities are lonely places, which is why they are also the perfect
+                canvas for learning to be alone. A review of three new books that
+                take solitude seriously.
+              </p>
+            </div>
+          </article>
+
+        </div><!-- .post-grid -->
+
+      </section><!-- .article-feed -->
+    </div>
+  </footer>
+
+</body>
+</html>
